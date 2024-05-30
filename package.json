@@ -1,6 +1,5 @@
 {
 	"name": "reflex-devtools",
-	"version": "1.1.0",
 	"scripts": {
 		"build": "npx rbxtsc && rojo build -o ReflexDevTools.rbxm",
 		"serve": "rojo serve serve.project.json",
@@ -12,7 +11,7 @@
 		"@rbxts/react-reflex": "^0.3.4",
 		"@rbxts/react-roblox": "^0.3.6",
 		"@rbxts/reflex": "^4.3.1",
-		"@rbxts/types": "^1.0.777",
+		"@rbxts/types": "^1.0.778",
 		"@typescript-eslint/eslint-plugin": "=7.11.0",
 		"@typescript-eslint/parser": "=7.11.0",
 		"eslint": "^8.57.0",
@@ -27,7 +26,7 @@
 		"prettier": "^3.2.5",
 		"rbxts-transform-debug": "^2.2.0",
 		"rbxts-transformer-services": "^1.1.1",
-		"roblox-ts": "^2.3.0-dev-3a89c93",
+		"roblox-ts": "2.3.0-dev-3a89c93",
 		"typescript": "=5.4.2"
 	},
 	"dependencies": {
