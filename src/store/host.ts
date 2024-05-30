@@ -1,24 +1,24 @@
 /// <reference types="@rbxts/types/plugin" />
 
-import { createProducer } from "@rbxts/reflex"
+import { createProducer } from "@rbxts/reflex";
 
 interface DispatchedAction {
-	name: string
-	args: unknown[]
-	state: object
+	name: string;
+	args: Array<unknown>;
+	state: object;
 }
 
 export interface Action extends DispatchedAction {
-	timestamp: number
+	timestamp: number;
 }
 
 export interface Host {
-	actions: Action[]
+	actions: Array<Action>;
 }
 
 const initialState: Host = {
 	actions: [],
-}
+};
 
 export const host = createProducer(initialState, {
 	dispatched: (state, action: DispatchedAction, timestamp: number) => ({
@@ -29,4 +29,4 @@ export const host = createProducer(initialState, {
 		...state,
 		actions: [],
 	}),
-})
+});

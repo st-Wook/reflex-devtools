@@ -1,19 +1,19 @@
 /// <reference types="@rbxts/types/plugin" />
 
-import { createProducer } from "@rbxts/reflex"
+import { createProducer } from "@rbxts/reflex";
 
 export interface Widget {
-	open: boolean
-	selectedIndex?: number
-	autoSelectLatest: boolean
-	showArgs: boolean
+	open: boolean;
+	selectedIndex?: number;
+	autoSelectLatest: boolean;
+	showArgs: boolean;
 }
 
 const initialState: Widget = {
 	open: false,
 	autoSelectLatest: true,
 	showArgs: true,
-}
+};
 
 export const widget = createProducer(initialState, {
 	toggled: (state, open?: boolean) => ({
@@ -33,4 +33,4 @@ export const widget = createProducer(initialState, {
 		...state,
 		showArgs: show,
 	}),
-})
+});

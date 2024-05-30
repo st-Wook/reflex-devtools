@@ -1,29 +1,30 @@
 {
-	"name": "roblox-ts-plugin",
-	"globIgnorePaths": [
-		"**/package.json",
-		"**/tsconfig.json",
-		"out/tsconfig.tsbuildinfo"
-	],
-	"tree": {
-		"$className": "DataModel",
-		"PluginDebugService": {
-			"$className": "PluginDebugService",
-			"user_ReflexDevTools.rbxm": {
-				"$className": "Plugin",
-				"ReflexDevTools": {
-					"$path": "out",
-					"include": {
-						"$path": "include",
-						"node_modules": {
-							"$className": "Folder",
-							"@rbxts": {
-								"$path": "node_modules/@rbxts"
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+  "name": "roblox-ts-plugin",
+  "globIgnorePaths": [
+    "**/package.json",
+    "**/tsconfig.json",
+    "**/node_modules/@rbxts/{types,compiler-types}",
+    "out/tsconfig.tsbuildinfo"
+  ],
+  "tree": {
+    "$className": "DataModel",
+    "PluginDebugService": {
+      "$className": "PluginDebugService",
+      "user_ReflexDevTools.rbxm": {
+        "$className": "Plugin",
+        "ReflexDevTools": {
+          "$path": "out",
+          "include": {
+            "$path": "include",
+            "node_modules": {
+              "$className": "Folder",
+              "@rbxts": {
+                "$path": "node_modules/@rbxts"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

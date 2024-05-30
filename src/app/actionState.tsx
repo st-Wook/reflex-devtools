@@ -1,50 +1,55 @@
-import Highlighter from "@rbxts/highlighter"
-import inspect from "@rbxts/inspect"
-import React, { useBinding, useEffect, useRef } from "@rbxts/react"
+import Highlighter from "@rbxts/highlighter";
+import inspect from "@rbxts/inspect";
+import { useEventListener } from "@rbxts/pretty-react-hooks";
+import React, { useEffect, useMemo, useRef, useState } from "@rbxts/react";
 
 interface Props {
-	state: object
+	state: object;
 }
 
 export function ActionState(props: Props) {
-	const label = useRef<TextLabel>()
+	const labelRef = useRef<TextLabel>();
+
+	const [theme, setTheme] = useState(settings().Studio.Theme);
+	useEventListener(settings().Studio.ThemeChanged, () => {
+		setTheme(settings().Studio.Theme);
+	});
+
+	const inspectedState = useMemo(() => inspect(props.state), [props.state]);
 
 	useEffect(() => {
-		const ref = label.current
-		if (!ref) {
-			warn("no ref")
-			return
+		const label = labelRef.current;
+		if (!label) {
+			return;
 		}
 
-		Highlighter.highlight({ textObject: ref })
-	}, [])
-
-	const inspected = inspect(props.state)
-
-	const [textYSize, setTextYSize] = useBinding(0)
+		return Highlighter.highlight({ textObject: label });
+	}, []);
 
 	return (
 		<scrollingframe
+			key={"ActionState"}
 			BackgroundTransparency={1}
-			BorderColor3={settings().Studio.Theme.GetColor(Enum.StudioStyleGuideColor.Border)}
-			CanvasSize={textYSize.map((y) => new UDim2(1, 0, 0, y))}
-			ScrollBarImageColor3={settings().Studio.Theme.GetColor(Enum.StudioStyleGuideColor.ScrollBar)}
-			ScrollBarThickness={6}
+			BorderColor3={theme.GetColor(Enum.StudioStyleGuideColor.Border)}
 			Size={UDim2.fromScale(1, 1)}
+			CanvasSize={new UDim2()}
+			AutomaticCanvasSize={Enum.AutomaticSize.XY}
+			ScrollBarImageColor3={theme.GetColor(Enum.StudioStyleGuideColor.ScrollBar)}
+			ScrollBarThickness={6}
 		>
 			<textlabel
+				key={"TextLabel"}
 				AutomaticSize={Enum.AutomaticSize.XY}
 				BackgroundTransparency={1}
-				Change={{ AbsoluteSize: (rbx) => setTextYSize(rbx.AbsoluteSize.Y) }}
-				Font={Enum.Font.RobotoMono}
-				Size={UDim2.fromScale(1, 1)}
-				Text={inspected}
+				FontFace={Font.fromEnum(Enum.Font.RobotoMono)}
+				Text={inspectedState}
 				TextColor3={new Color3(1, 1, 1)}
 				TextSize={16}
 				TextXAlignment={Enum.TextXAlignment.Left}
 				TextYAlignment={Enum.TextYAlignment.Top}
-				ref={label}
+				AutoLocalize={false}
+				ref={labelRef}
 			/>
 		</scrollingframe>
-	)
+	);
 }
